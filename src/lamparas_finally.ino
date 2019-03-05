@@ -75,7 +75,7 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 
 
 const char WiFiAPPSK[] = "12345678";  //CONTRASEÑA
-const char ssid[] = "ingenieros"; // NOMBRE DE LA RED
+const char ssid[] = "INGES2.5"; // NOMBRE DE LA RED
 uint8_t pin_led = 2;
 
 char webpage[] PROGMEM = R"=====(
