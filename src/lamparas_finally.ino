@@ -72,6 +72,7 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define rele1  D0  //(D0)
 #define rele2  D1 // D1
 #define rele3  D2 // D3
+#define boton  D4 //D4
 
 
 const char WiFiAPPSK[] = "12345678";  //CONTRASEÑA
@@ -149,12 +150,13 @@ char webpage[] PROGMEM = R"=====(
 void setup()
 {
   Serial.begin(115200);
-  Serial.print("\nSetting up... ");
+  Serial.print("Iniciando");
 
   //Engine channels
   pinMode(rele1, OUTPUT);
   pinMode(rele2,OUTPUT);
   pinMode(rele3,OUTPUT);
+  pinMode(boton,INPUT);
   digitalWrite(rele1, HIGH);
   digitalWrite(rele2,HIGH);
   digitalWrite(rele3,HIGH);
@@ -191,6 +193,9 @@ void setup()
 //----------------------------------------------------------- loop
 void loop()
 {
+  int boton_1;
+  boton_1=digitalRead(boton);
+  Serial.println(boton_1);
   webSocket.loop();
   server.handleClient();
   if(Serial.available() > 0)
