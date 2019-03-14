@@ -75,8 +75,8 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define boton  D4 //D4
 
 
-const char WiFiAPPSK[] = "12345678";  //CONTRASEÑA
-const char ssid[] = "Moto G (5) Plus"; // NOMBRE DE LA RED
+const char WiFiAPPSK[] = "inges12345";  //CONTRASEÑA
+const char ssid[] = "MOTO G5 PLUS"; // NOMBRE DE LA RED
 uint8_t pin_led = 2;
 
 char webpage[] PROGMEM = R"=====(
@@ -296,7 +296,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 void setupWiFi()
 {
   WiFi.mode(WIFI_STA);
-  WiFi.softAP(ssid, WiFiAPPSK);
+  //WiFi.mode(WIFI_SoftAP);
+  //WiFi.softAP(ssid, WiFiAPPSK);
   Serial.print("\ningenieros IP Address: ");
   Serial.println(WiFi.localIP());
+  //Serial.println(WiFi.IP());
 }
