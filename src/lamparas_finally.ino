@@ -75,8 +75,8 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define boton  D4 //D4
 
 
-const char WiFiAPPSK[] = "inges12345";  //CONTRASEÑA
-const char ssid[] = "MOTO G5 PLUS"; // NOMBRE DE LA RED
+const char WiFiAPPSK[] = "science_7425";  //CONTRASEÑA
+const char ssid[] = "Inventoteca 2G"; // NOMBRE DE LA RED
 uint8_t pin_led = 2;
 
 char webpage[] PROGMEM = R"=====(
@@ -195,7 +195,7 @@ void loop()
 {
   int boton_1;
   boton_1=digitalRead(boton);
-  Serial.println(boton_1);
+  //Serial.println(boton_1);
   webSocket.loop();
   server.handleClient();
   if(Serial.available() > 0)
@@ -217,8 +217,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
           uint16_t brightness = (uint16_t) strtol((const char *) &payload[1], NULL, 10);
           brightness = 1024 - brightness;
           analogWrite(pin_led, brightness);
-          Serial.print("brightness= ");
-          Serial.println(brightness);
+        //  Serial.print("brightness= ");
+          // Serial.println(brightness);
           if (brightness>512)
           {
             digitalWrite(rele1,HIGH);
@@ -296,6 +296,11 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 void setupWiFi()
 {
   WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, WiFiAPPSK);
+  while(WiFi.status()!=WL_CONNECTED){
+    delay(500);
+    Serial.print(".");
+  }
   //WiFi.mode(WIFI_SoftAP);
   //WiFi.softAP(ssid, WiFiAPPSK);
   Serial.print("\ningenieros IP Address: ");
