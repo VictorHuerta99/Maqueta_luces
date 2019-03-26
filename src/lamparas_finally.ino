@@ -3,9 +3,9 @@
 //https://github.com/acrobotic/Ai_Tips_ESP8266/blob/master/webserver_websockets/webserver_websockets.ino
 
 /*------------------------------------------------------------------------------
-  07/01/2018
-  Author: Makerbro
-  Platforms: ESP8266
+  25/03/19
+  Author: Brandon Daniel Tamariz Cerezo, Victor Manuel Cisneros Huerta.
+  Platforms: NodeMCU 1.0
   Language: C++/Arduino
   File: webserver_html.ino
   ------------------------------------------------------------------------------
@@ -25,27 +25,6 @@
   ------------------------------------------------------------------------------
   License:
   Please see attached LICENSE.txt file for details.
------------------------------------------
-
-/* LSM9DS1_MS5611_t3 Basic Example Code
- by: Kris Winer
- date: November 1, 2014
- license: Beerware - Use this code however you'd like. If you
- find it useful you can buy me a beer some time.
-
- Demonstrate basic LSM9DS1 functionality including parameterizing the register addresses, initializing the sensor,
- getting properly scaled accelerometer, gyroscope, and magnetometer data out. Added display functions to
- allow display to on breadboard monitor. Addition of 9 DoF sensor fusion using open source Madgwick and
- Mahony filter algorithms. Sketch runs on the 3.3 V 8 MHz Pro Mini and the Teensy 3.1.
-
- This sketch is intended specifically for the LSM9DS1+MS5611 Add-on shield for the Teensy 3.1.
- It uses SDA/SCL on pins 17/16, respectively, and it uses the Teensy 3.1-specific Wire library i2c_t3.h.
- The MS5611 is a simple but high resolution pressure sensor, which can be used in its high resolution
- mode but with power consumption od 20 microAmp, or in a lower resolution mode with power consumption of
- only 1 microAmp. The choice will depend on the application.
-
- SDA and SCL should have external pull-up resistors (to 3.3V).
- 4K7 resistors are on the LSM9DS1+MS5611 Teensy 3.1 add-on shield/breakout board.
 
  Hardware setup:
  LSM9DS1Breakout --------- Arduino
@@ -75,10 +54,10 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define boton  D4 //D4
 
 
-const char WiFiAPPSK[] = "science_7425";  //CONTRASEÑA
-const char ssid[] = "Inventoteca 2G"; // NOMBRE DE LA RED
+const char WiFiAPPSK[] = "inges12345";  //CONTRASEÑA
+const char ssid[] = "Moto g5 plus"; // NOMBRE DE LA RED
 uint8_t pin_led = 2;
-
+MDNSResponder mdns;
 char webpage[] PROGMEM = R"=====(
 <html>
 <head>
@@ -167,9 +146,10 @@ void setup()
   setupWiFi();
 
 
-  if(MDNS.begin("esp8266"))
+  if(mdns.begin("ingenieros",WiFi.localIP()))
   {
     Serial.println("\nMDNS responder started");
+
   }
 
   // handle index
